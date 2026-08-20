@@ -1,7 +1,7 @@
 # read_json_fields.py
 import json
 from pathlib import Path
-
+import numpy as np
 
 def read_json_fields(json_path: str):
     """
@@ -56,11 +56,27 @@ if __name__ == "__main__":
         sys.exit(1)
 
     out = read_json_fields(sys.argv[1])
-    #print(out)
+    
+    #kk=json.loads(out[0]['domain_color'])
+    #for j in range(len(kk)):
+    #   print(kk[j])
+    #print(json.loads(out[0]['CDR3_json'])[-1][0][0])
+    
+    #exit(0)
     for i in range(len(out)):
+       #kk=json.loads(out[i]['domain_color'])
+       #for j in range(len(kk)):
+       #   print(kk[j])    
+       #    if r
        if 'red' in out[i]['domain_color']:
            #print(out[i]['domain_color'].split())
-           print(out[i]['id'], out[i]["imgt_frm_identity"],out[i]["Abnormal Cys"],out[i]["Free Cysteine"],out[i]["Glycosylation"],out[i]["Deamidation"],out[i]["Isomerization"])
+           cdr1_0=json.loads(out[i]['CDR1_json'])[0][0][0]
+           cdr1_1=json.loads(out[i]['CDR1_json'])[-1][0][0]
+           cdr2_0=json.loads(out[i]['CDR2_json'])[0][0][0]
+           cdr2_1=json.loads(out[i]['CDR2_json'])[-1][0][0]
+           cdr3_0=json.loads(out[i]['CDR3_json'])[0][0][0]
+           cdr3_1=json.loads(out[i]['CDR3_json'])[-1][0][0] 
+           print(out[i]['id'], out[i]["imgt_frm_identity"],out[i]["Abnormal Cys"],out[i]["Free Cysteine"],out[i]["Glycosylation"],out[i]["Deamidation"],out[i]["Isomerization"] , "CDR1:%i-%i"%(cdr1_0,cdr1_1), "CDR2:%i-%i"%(cdr2_0,cdr2_1), "CDR3:%i-%i"%(cdr3_0,cdr3_1))
        else:
            print(out[i]['id'], out[i]["imgt_frm_identity"])
 
